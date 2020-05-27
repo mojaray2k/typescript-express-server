@@ -1,14 +1,12 @@
-import express, {Request, Response} from 'express';
+import express from 'express';
+import morgan from 'morgan';
+import {router} from './routes/loginRoutes';
 
 const app = express();
 
-app.get('/', (req: Request, res: Response) => {
-  res.send(/*javascript */ `
-    <div>
-      <h1>Hi there!</h1>
-    </div>
-  `);
-});
+app.use(morgan('dev'));
+app.use(express.urlencoded({extended: true}));
+app.use(router);
 
 app.listen(3020, () => {
   console.log('Listing on port 3020');
